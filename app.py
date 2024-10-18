@@ -1,3 +1,12 @@
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+
+MONGODB_USERNAME = os.getenv('MONGODB_USERNAME')
+MONGODB_PASSWORD = os.getenv('MONGODB_PASSWORD')
+
+
 from flask import Flask, render_template
 
 from pymongo import MongoClient
