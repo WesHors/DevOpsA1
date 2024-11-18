@@ -14,9 +14,11 @@ from pymongo import MongoClient
 # Creates application instance
 app = Flask(__name__)
 
-# Creates mongodb client
-mongodb_client = MongoClient("mongodb+srv://weshors:asdf1234@devopsdb.ddfwl.mongodb.net/?retryWrites=true&w=majority&appName=DevOpsDB")
+# Load MongoDB Credentials and URI from env
+MONGODB_URI = os.getenv("MONGODB_URI")
 
+# Creates mongodb client
+mongodb_client = MongoClient(MONGODB_URI)
 db = mongodb_client["shop_db"]
 products_collection = db["products"]
 
@@ -42,4 +44,4 @@ def products():
     products = list(products_collection.find())
     return render_template("products.html", products=products)
 
-app.run(host="0.0.0.0", port=5000)
+app.run(host="0.0.0.0", port=5000, debug=True)
